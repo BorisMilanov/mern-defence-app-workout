@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/postModel')
 
-router.post('/api/posts', async (req, res) => {
+router.post('/posts', async (req, res) => {
   try {
-    const { postTitle, postContent } = req.body;
+    const { title, reps, sets, calories } = req.body;
+
     console.log(title);
     // Validate data
-   
+
     // Save to database
-    const post = new Post({ postTitle, postContent });
+    const post = new Post({ title, reps, sets, calories });
     await post.save();
     res.status(201).json({ message: 'Post added successfully' });
   } catch (error) {

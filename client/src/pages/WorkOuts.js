@@ -5,21 +5,23 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const AddPostForm = () => {
   const [title, setTitle] = useState('');
   const [reps, setReps] = useState('');
+  const [sets, setFitnessSet] = useState('');
+  const [calories, setCalories] = useState('');
   // const navigate = useNavigate()
   
   let {user} = useAuthContext()
- console.log(user.token);
+
   const onSubmitt = async (e) => {
 
     e.preventDefault();
-    fetch('http://localhost:4000/posts', {
+    fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
          'Authorization': `Bearer ${user.token}`,
        
       },
-        body: JSON.stringify({title,reps}),
+        body: JSON.stringify({title,reps,sets,calories}),
         
       }).then(response => response.json()).then(json => console.log(json));
     
@@ -46,6 +48,23 @@ const AddPostForm = () => {
         }
         />
       </label>
+      <label>
+        Sets
+        <input value={sets} type="number"
+        onChange ={(e) => 
+          setFitnessSet(e.target.value)
+        }
+        />
+      </label>
+      <label>
+        Calories burn from one set:
+        <input value={calories} type="number"
+        onChange ={(e) => 
+          setCalories(e.target.value)
+        }
+        />
+      </label>
+
       <button type="submit">Submit</button>
     </form>
   );

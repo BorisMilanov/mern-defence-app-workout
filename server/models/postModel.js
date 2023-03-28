@@ -12,6 +12,12 @@ const PostSchema = new Schema({
     reps: {
         type: Number,
         require: true
+    },sets: {
+        type: Number,
+        require: true
+    },calories: {
+        type: Number,
+        require: true
     }
 });
 

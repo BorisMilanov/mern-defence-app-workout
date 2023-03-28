@@ -18,21 +18,22 @@ app.use((req, res, next) => {
     next();
 });
 app.use('/api/user',userRoutes)
+app.use('/api/',postRoutes)
 //
-app.post('/posts', async (req, res) => {
-  try {
-    const {title,reps} = req.body;
-    console.log(title);
-    // Validate data
+// app.post('/posts', async (req, res) => {
+//   try {
+//     const {title,reps} = req.body;
+//     console.log(title);
+//     // Validate data
    
-    // Save to database
-    const post = new Post({title,reps});
-    await post.save();
-    res.status(201).json({ message: 'Post added successfully' });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
+//     // Save to database
+//     const post = new Post({title,reps});
+//     await post.save();
+//     res.status(201).json({ message: 'Post added successfully' });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// });
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
